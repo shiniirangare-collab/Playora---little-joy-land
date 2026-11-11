@@ -1,100 +1,112 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Playora ♡</title>
 <style>
-* {
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg,#fff0f6,#eee7ff,#fff8e8);
-  color: #65465e;
-  text-align: center;
-}
-header {
-  padding: 25px 15px;
-}
-.logo {
-  font-size: 30px;
-  font-weight: bold;
-  color: #d66b9b;
-}
-.tagline {
-  color: #987a9c;
-}
-.welcome {
-  margin: 20px auto;
-  padding: 35px 20px;
-  max-width: 700px;
-  background: #ffffffbb;
-  border-radius: 28px;
-}
-h1 {
-  color: #c85f91;
-  font-size: 34px;
-}
-button {
-  background: #e99cbd;
-  border: none;
-  border-radius: 25px;
-  padding: 13px 22px;
-  color: white;
-  font-size: 16px;
-  margin: 7px;
-  cursor: pointer;
-}
-.worlds {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 15px;
-  max-width: 650px;
-  margin: 20px auto;
-  padding: 12px;
-}
-.world {
-  padding: 25px 10px;
-  border-radius: 22px;
-  background: white;
-  box-shadow: 0 5px 15px #d9bfd955;
-}
-.world span {
-  font-size: 35px;
-}
-footer {
-  padding: 30px;
-}
+body{margin:0;padding:20px;text-align:center;font-family:Arial;background:linear-gradient(135deg,#fff0f6,#eee7ff,#fff8e8);color:#65465e}
+header{padding:20px}
+.logo{font-size:32px;color:#d66b9b;font-weight:bold}
+section{background:#ffffffcc;border-radius:25px;padding:25px;margin:20px auto;max-width:650px}
+h1{color:#c85f91}
+button{background:#e99cbd;border:0;border-radius:25px;padding:13px 22px;color:white;font-size:16px;margin:8px}
+.worlds{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:600px;margin:auto}
+.world{background:white;padding:20px 5px;border-radius:20px}
+.world span{font-size:32px}
+.hidden{display:none}
+input{padding:12px;width:90px;border:1px solid pink;border-radius:12px}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="logo">♡ PLAYORA</div>
-  <p class="tagline">A little world of endless fun ✨</p>
+<div class="logo">♡ PLAYORA</div>
+<p>A little world of endless fun ✨</p>
 </header>
 
-<section class="welcome">
-  <div style="font-size:40px">☁️ 🌷 ☁️</div>
-  <h1>Welcome to your happy place!</h1>
-  <p>Play, relax, connect and discover something joyful every day.</p>
-  <button onclick="alert('Your adventure begins! 💗')">
-    Let's Play ♡
-  </button>
+<div id="home">
+<section>
+<div style="font-size:40px">☁️ 🌷 ☁️</div>
+<h1>Welcome to your happy place!</h1>
+<p>Play, relax, connect and discover something joyful every day.</p>
+<button onclick="showGames()">Let's Play ♡</button>
 </section>
-
 <h2>Choose your little world ✨</h2>
-
 <div class="worlds">
-  <div class="world"><span>🎀</span><h3>Cute World</h3><p>Sweet little fun</p></div>
-  <div class="world"><span>💗</span><h3>Love World</h3><p>Made with love</p></div>
-  <div class="world"><span>🌿</span><h3>Calm World</h3><p>Relax and breathe</p></div>
-  <div class="world"><span>🧩</span><h3>Brain World</h3><p>Play and think</p></div>
+<div class="world"><span>🎀</span><h3>Cute World</h3><p>Sweet little fun</p></div>
+<div class="world"><span>💗</span><h3>Love World</h3><p>Made with love</p></div>
+<div class="world"><span>🌿</span><h3>Calm World</h3><p>Relax and breathe</p></div>
+<div class="world"><span>🧩</span><h3>Brain World</h3><p>Play and think</p></div>
+</div>
 </div>
 
-<footer>Made with ♡ just for happy moments</footer>
+<div id="games" class="hidden">
+<section>
+<h1>Choose a mini-game 🎮</h1>
+<div class="worlds">
+<div class="world" onclick="startGame()">
+<span>🔢</span><h3>Guess the Number</h3>
+<p>Test your luck!</p>
+</div>
+<div class="world">
+<span>🧠</span><h3>Memory Match</h3>
+<p>Coming soon!</p>
+</div>
+<div class="world">
+<span>💌</span><h3>Love Quiz</h3>
+<p>Coming soon!</p>
+</div>
+</div>
+<button onclick="goHome()">← Home</button>
+</section>
+</div>
 
+<div id="game" class="hidden">
+<section>
+<h1>Guess the Number 🔢</h1>
+<p>Guess a number between 1 and 10!</p>
+<input id="guess" type="number" min="1" max="10">
+<br>
+<button onclick="checkGuess()">Check Answer</button>
+<p id="result"></p>
+<button onclick="newGame()">Play Again</button>
+<button onclick="showGames()">All Games</button>
+</section>
+</div>
+
+<script>
+let secret=Math.floor(Math.random()*10)+1;
+function hideAll(){
+document.getElementById('home').classList.add('hidden');
+document.getElementById('games').classList.add('hidden');
+document.getElementById('game').classList.add('hidden');
+}
+function showGames(){
+hideAll();
+document.getElementById('games').classList.remove('hidden');
+}
+function goHome(){
+hideAll();
+document.getElementById('home').classList.remove('hidden');
+}
+function startGame(){
+hideAll();
+document.getElementById('game').classList.remove('hidden');
+}
+function checkGuess(){
+let n=Number(document.getElementById('guess').value);
+let r=document.getElementById('result');
+if(n<1||n>10){r.innerText='Enter a number from 1 to 10!';}
+else if(n===secret){r.innerText='Correct! You won! 🎉';}
+else if(n<secret){r.innerText='Try a higher number! 💗';}
+else{r.innerText='Try a lower number! 💗';}
+}
+function newGame(){
+secret=Math.floor(Math.random()*10)+1;
+document.getElementById('guess').value='';
+document.getElementById('result').innerText='New game started! ✨';
+}
+</script>
 </body>
 </html>
